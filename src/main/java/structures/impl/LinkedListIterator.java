@@ -1,11 +1,11 @@
 package structures.impl;
 
 /**
- * Iterator over the elements of a list. Implements Java's Iterator interface.
+ * Iterator over the elements of a linked list.
  * @author Joel D'Autilio
  * @params T the type of the elements to iterate over
  */
-public class ListIterator<T> implements Iterator<T> {
+public class LinkedListIterator<T> implements ListIterator<T> {
 
 	public ListIterator(Node<T> node) 
 	{ currentNode = node; }
