@@ -1,5 +1,8 @@
 package structures.impl;
 
+import java.util.NoSuchElementException;
+import structures.ListIterator;
+
 /**
  * Iterator over the elements of a linked list.
  * @author Joel D'Autilio
@@ -7,7 +10,7 @@ package structures.impl;
  */
 public class LinkedListIterator<T> implements ListIterator<T> {
 
-	public ListIterator(Node<T> node) 
+	public LinkedListIterator(Node<T> node) 
 	{ currentNode = node; }
 
 	public boolean hasNext()

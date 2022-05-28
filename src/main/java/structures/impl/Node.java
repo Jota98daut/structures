@@ -2,10 +2,10 @@ package structures.impl;
 
 class Node<T> {
 
-	Node<T>()
+	Node()
 	{ this(null); }
 
-	Node<T>(T e)
+	Node(T e)
 	{ data = e; }
 
 	T data()
