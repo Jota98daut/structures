@@ -24,4 +24,11 @@ public interface List<T> extends Collection<T> {
 	 */
 	public T remove(int idx);
 
+	/**
+	 * Return the element at the specified position of this list.
+	 * @param idx index of the element to return, of range [0..n)
+	 * @return the element at the specified position
+	 */
+	public T get(int idx);
+
 }
