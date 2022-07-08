@@ -100,7 +100,7 @@ public class ArrayList<T> implements List<T> {
 				return remove(i) != null;
 		}
 
-		return false
+		return false;
 	}
 
 	@Override
