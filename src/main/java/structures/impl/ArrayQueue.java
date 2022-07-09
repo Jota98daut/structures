@@ -7,12 +7,17 @@ public class ArrayQueue<T> implements Queue<T> {
 	private T[] array;
 	private int head;
 	private int tail;
+	private static final int DEFAULT_SIZE = 50;
 
 	@SuppressWarnings("unchecked")
 	public ArrayQueue(int size) {
 		array = (T[]) new Object[size];
 		head = 0;
 		tail = 0;
+	}
+
+	public ArrayQueue() {
+		this(DEFAULT_SIZE);
 	}
 
 	@Override
