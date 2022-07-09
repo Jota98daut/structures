@@ -24,6 +24,20 @@ public class Sorting {
 		}
 	}
 
+	public static void insertionSort(Comparable[] a) {
+		int n = a.length;
+		
+		for(int i = 0; i < n; i++) { // A[0..i-1] is sorted 
+			Comparable current = a[i];
+			int k = i;
+			while(k > 0 && a[k-1].compareTo(current) > 0) { // k > 0 AND A[k-1] > current
+				a[k] = a[k-1];
+				k--;
+			}
+			a[k] = current;
+		}
+	}
+
 	private static void swap(Object[] a, int i, int j) {
 		if(i < 0 || j >= a.length)
 			throw new IndexOutOfBoundsException("" + i + "," + j);
