@@ -30,6 +30,22 @@ public class SortingTest {
 	}
 
 	@Test
+	public void mergeEmptyTest() {
+		Integer[] actual = new Integer[] {};
+		Sorting.mergeSort(actual);
+		Integer[] expected = new Integer[] {};
+		assertArrayEquals("Empty array", expected, actual);
+	}
+
+	@Test
+	public void quickEmptyTest() {
+		Integer[] actual = new Integer[] {};
+		Sorting.quickSort(actual);
+		Integer[] expected = new Integer[] {};
+		assertArrayEquals("Empty array", expected, actual);
+	}
+
+	@Test
 	public void selectionUnitaryTest() {
 		Integer[] actual = new Integer[] {1};
 		Sorting.selectionSort(actual);
@@ -54,6 +70,22 @@ public class SortingTest {
 	}
 
 	@Test
+	public void mergeUnitaryTest() {
+		Integer[] actual = new Integer[] {1};
+		Sorting.mergeSort(actual);
+		Integer[] expected = new Integer[] {1};
+		assertArrayEquals("Unitary array", expected, actual);
+	}
+
+	@Test
+	public void quickUnitaryTest() {
+		Integer[] actual = new Integer[] {1};
+		Sorting.quickSort(actual);
+		Integer[] expected = new Integer[] {1};
+		assertArrayEquals("Unitary array", expected, actual);
+	}
+
+	@Test
 	public void selectionSmallTest() {
 		Integer[] actual = new Integer[] {3,1,2};
 		Sorting.selectionSort(actual);
@@ -73,6 +105,22 @@ public class SortingTest {
 	public void insertionSmallTest() {
 		Integer[] actual = new Integer[] {3,1,2};
 		Sorting.insertionSort(actual);
+		Integer[] expected = new Integer[] {1,2,3};
+		assertArrayEquals("Small array", expected, actual);
+	}
+
+	@Test
+	public void mergeSmallTest() {
+		Integer[] actual = new Integer[] {3,1,2};
+		Sorting.mergeSort(actual);
+		Integer[] expected = new Integer[] {1,2,3};
+		assertArrayEquals("Small array", expected, actual);
+	}
+
+	@Test
+	public void quickSmallTest() {
+		Integer[] actual = new Integer[] {3,1,2};
+		Sorting.quickSort(actual);
 		Integer[] expected = new Integer[] {1,2,3};
 		assertArrayEquals("Small array", expected, actual);
 	}
@@ -107,6 +155,30 @@ public class SortingTest {
 		for(int i = 0; i < 1000; i++)
 			actual[i] = 999 - i;
 		Sorting.insertionSort(actual);
+		Integer[] expected = new Integer[1000];
+		for(int i = 0; i < 1000; i++)
+			expected[i] = i;
+		assertArrayEquals("Big array", expected, actual);
+	}
+
+	@Test
+	public void mergeBigTest() {
+		Integer[] actual = new Integer[1000];
+		for(int i = 0; i < 1000; i++)
+			actual[i] = 999 - i;
+		Sorting.mergeSort(actual);
+		Integer[] expected = new Integer[1000];
+		for(int i = 0; i < 1000; i++)
+			expected[i] = i;
+		assertArrayEquals("Big array", expected, actual);
+	}
+
+	@Test
+	public void quickBigTest() {
+		Integer[] actual = new Integer[1000];
+		for(int i = 0; i < 1000; i++)
+			actual[i] = 999 - i;
+		Sorting.quickSort(actual);
 		Integer[] expected = new Integer[1000];
 		for(int i = 0; i < 1000; i++)
 			expected[i] = i;

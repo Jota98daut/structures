@@ -1,5 +1,7 @@
 package structures;
 
+import java.util.Random;
+
 public class Sorting {
 
 	public static void selectionSort(Comparable[] a) {
@@ -36,6 +38,93 @@ public class Sorting {
 			}
 			a[k] = current;
 		}
+	}
+
+	public static void mergeSort(Comparable[] a) {
+		int n = a.length;
+		auxMergeSort(a, 0, n);
+	}
+
+	private static void auxMergeSort(Comparable[] a, int l, int h) {
+		if(l < 0 || h > a.length)
+			throw new IndexOutOfBoundsException("" + l + "," + h);
+
+		if(h - l < 2) // Base cases: 0 or 1 elements
+			return;
+
+		int m = (h + l) / 2;
+		auxMergeSort(a, l, m);
+		auxMergeSort(a, m, h);
+		merge(a, l, m, h);
+	}
+
+	public static void quickSort(Comparable[] a) {
+		auxQuickSort(a, 0, a.length-1);
+	}
+
+	private static void auxQuickSort(Comparable[] a, int lo, int hi) {
+		if(lo < hi) {
+			// int p = partition(a, lo, hi);
+			// auxQuickSort(a, lo, p);
+			int p = dutchflag(a, lo, hi);
+			auxQuickSort(a, lo, p-1);
+			auxQuickSort(a, p+1, hi);
+		}
+	}
+
+	private static int dutchflag(Comparable[] a, int lo, int hi) {
+		Random rand = new Random();
+		int pIndex = rand.nextInt(hi - lo + 1) + lo;
+		Comparable pivot = a[pIndex];
+
+		int firstEqual = lo;
+		int firstUnsorted = lo;
+		int lastUnsorted = hi;
+
+		while(firstUnsorted <= lastUnsorted) { // There are unsorted values left
+			if(a[firstUnsorted].compareTo(pivot) < 0)
+				swap(a, firstUnsorted++, firstEqual++);
+			else if(a[firstUnsorted].compareTo(pivot) > 0)
+				swap(a, firstUnsorted, lastUnsorted--);
+			else
+				firstUnsorted++;
+		}
+		return lastUnsorted; // At this point lastUnsorted <= pivot, and everything to its right is > pivot
+	}
+
+	private static int partition(Comparable[] a, int lo, int hi) {
+		Random rand = new Random();
+		int pIndex = rand.nextInt(hi - lo + 1) + lo;
+		Comparable pivot = a[pIndex];
+
+		int i = lo - 1;
+		int j = hi + 1;
+		while(i < j) {
+			do i++; while(a[i].compareTo(pivot) < 0);
+			do j--; while(a[j].compareTo(pivot) > 0);
+			if(i < j)
+				swap(a, i, j);
+		}
+		return j;
+	}
+
+	private static void merge(Comparable[] a, int low, int mid, int high) {
+		int size = high - low;
+		Comparable[] auxArray = new Comparable[size];
+		int l = low;
+		int r = mid;
+		int k = 0;
+
+		while(l < mid && r < high)
+			auxArray[k++] = (a[l].compareTo(a[r]) <= 0) ? a[l++] : a[r++]; // a[l] > a[r] ?
+
+		while(l < mid)
+			auxArray[k++] = a[l++];
+		while(r < high)
+			auxArray[k++] = a[r++];
+
+		System.arraycopy(auxArray, 0, a, low, size);
+
 	}
 
 	private static void swap(Object[] a, int i, int j) {
