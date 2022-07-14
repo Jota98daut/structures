@@ -72,6 +72,35 @@ public class Sorting {
 		}
 	}
 
+	public static void countingSort(int[] a) {
+		// Target array B
+		int[] b = new int[a.length];
+
+		// Find max integer k
+		int k = 0;
+		for(int i = 0; i < a.length; i++) {
+			if(a[i] < 0) throw new IllegalArgumentException("array values must be non negative");
+			k = Math.max(k, a[i]);
+		}
+
+		// Auxiliary array C initialized with 0's
+		int[] c = new int[k+1];
+		
+		// Populate C: c[i] represents the number of values less or equal to i
+		for(int i = 0; i < a.length; i++)
+			c[a[i]]++;
+		for(int i = 1; i <= k; i++)
+			c[i] += c[i-1];
+
+		// Populate B
+		for(int i = a.length-1; i >= 0; i--) {
+			b[c[a[i]] - 1] = a[i];
+			c[a[i]]--;
+		}
+
+		System.arraycopy(b,0,a,0,a.length);
+	}
+
 	private static int dutchflag(Comparable[] a, int lo, int hi) {
 		Random rand = new Random();
 		int pIndex = rand.nextInt(hi - lo + 1) + lo;

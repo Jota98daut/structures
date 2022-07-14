@@ -12,9 +12,7 @@ public class SortingTest {
 		Integer[] expected = new Integer[] {};
 		assertArrayEquals("Empty array", expected, actual);
 	}
-
-	@Test
-	public void bubbleEmptyTest() {
+@Test public void bubbleEmptyTest() {
 		Integer[] actual = new Integer[] {};
 		Sorting.bubbleSort(actual);
 		Integer[] expected = new Integer[] {};
@@ -42,6 +40,14 @@ public class SortingTest {
 		Integer[] actual = new Integer[] {};
 		Sorting.quickSort(actual);
 		Integer[] expected = new Integer[] {};
+		assertArrayEquals("Empty array", expected, actual);
+	}
+
+	@Test
+	public void countingEmptyTest() {
+		int[] actual = new int[] {};
+		Sorting.countingSort(actual);
+		int[] expected = new int[] {};
 		assertArrayEquals("Empty array", expected, actual);
 	}
 
@@ -86,6 +92,14 @@ public class SortingTest {
 	}
 
 	@Test
+	public void countingUnitaryTest() {
+		int[] actual = new int[] {1};
+		Sorting.countingSort(actual);
+		int[] expected = new int[] {1};
+		assertArrayEquals("Unitary array", expected, actual);
+	}
+
+	@Test
 	public void selectionSmallTest() {
 		Integer[] actual = new Integer[] {3,1,2};
 		Sorting.selectionSort(actual);
@@ -122,6 +136,14 @@ public class SortingTest {
 		Integer[] actual = new Integer[] {3,1,2};
 		Sorting.quickSort(actual);
 		Integer[] expected = new Integer[] {1,2,3};
+		assertArrayEquals("Small array", expected, actual);
+	}
+
+	@Test
+	public void countingSmallTest() {
+		int[] actual = new int[] {3,1,2};
+		Sorting.countingSort(actual);
+		int[] expected = new int[] {1,2,3};
 		assertArrayEquals("Small array", expected, actual);
 	}
 
@@ -180,6 +202,18 @@ public class SortingTest {
 			actual[i] = 999 - i;
 		Sorting.quickSort(actual);
 		Integer[] expected = new Integer[1000];
+		for(int i = 0; i < 1000; i++)
+			expected[i] = i;
+		assertArrayEquals("Big array", expected, actual);
+	}
+
+	@Test
+	public void countingBigTest() {
+		int[] actual = new int[1000];
+		for(int i = 0; i < 1000; i++)
+			actual[i] = 999 - i;
+		Sorting.countingSort(actual);
+		int[] expected = new int[1000];
 		for(int i = 0; i < 1000; i++)
 			expected[i] = i;
 		assertArrayEquals("Big array", expected, actual);
