@@ -11,7 +11,7 @@ import structures.WeightedGraph;
 
 public class DirectedWeightedGraph<V> implements WeightedGraph<V> {
 
-	Map<V,List<Pair<V,Double>>> adjacencyMap;
+	private Map<V,List<Pair<V,Double>>> adjacencyMap;
 
 	public DirectedWeightedGraph() {
 		adjacencyMap = new HashMap<>();

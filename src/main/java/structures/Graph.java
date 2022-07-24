@@ -25,4 +25,30 @@ public interface Graph<V> extends Iterable<V> {
 
 	public Iterator<V> bfsIterator();
 
+	private static void warshall(double[][] g, int[][] path, double[][] cost) {
+		int n = g.length;
+		initialize(g, path, cost);
+		for(int k = 0; k < n; k++) {
+			for(int i = 0; i < n; i++) {
+				for(int j = 0; j < n; j++) {
+					if(cost[i][k] + cost[k][j] < cost[i][j]) {
+						cost[i][j] = cost[i][k] + cost[k][j];
+						path[i][j] = k;
+					}
+				}
+			}
+		}
+	}
+
+	private static void initialize(double[][] graph, int[][] path, double[][] cost) {
+		int n = graph.length;
+		for(int i = 0; i < n; i++) {
+			for(int j = 0; j < n; j++) {
+				cost[i][j] = graph[i][j];
+				if(graph[i][j] < Double.MAX_VALUE)
+					path[i][j] = i;
+			}
+		}
+	}
+
 }
