@@ -4,13 +4,15 @@ import structures.Queue;
 
 public class LinkedQueue<T> implements Queue<T> {
 
-	private Node<T> head;
-	private Node<T> tail;
+	private final Node<T> head;
+	private final Node<T> tail;
 	private int size;
 
 	public LinkedQueue() {
-		head = new Node<T>();
-		tail = new Node<T>();
+		head = new Node<>();
+		tail = new Node<>();
+		head.setNext(tail);
+		tail.setPrevious(head);
 		size = 0;
 	}
 
@@ -36,6 +38,7 @@ public class LinkedQueue<T> implements Queue<T> {
 		T retValue = head.next().data();
 		Node<T> newHead = head.next().next();
 		head.setNext(newHead);
+		newHead.setPrevious(head);
 		size--;
 
 		return retValue;
