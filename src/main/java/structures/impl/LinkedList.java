@@ -106,13 +106,13 @@ public class LinkedList<T> implements List<T> {
 	 */
 	public void clear() {
 		head.setNext( tail );
-		tail.setNext( head );
+		tail.setPrevious( head );
 		size = 0;
 	}
 
 	/**
 	 * Return whether this list contains the specified element.
-	 * @param e the element to search for
+	 * @param o the element to search for
 	 * @return true iff the specified element exists in this list
 	 */
 	public boolean contains( Object o ) {
@@ -151,14 +151,14 @@ public class LinkedList<T> implements List<T> {
 	public boolean equals( Object o ) {
 		if( o == null ) return false;
 		if( o == this ) return true;
-		if( !(o instanceof List<?>) ) return false;
+		if( !(o instanceof List) ) return false;
 
-		List<Object> oAsList = (List<Object>) o;
+		List<?> oAsList = (List<?>) o;
 
 		if( oAsList.size() != size ) return false;
 
 		Node<T> currNode = head;
-		ListIterator<Object> otherItr = (ListIterator<Object>) oAsList.iterator();
+		Iterator<?> otherItr = oAsList.iterator();
 		for( int i = 0; i < size; i++ ) {
 			currNode = currNode.next();
 			if( !currNode.data().equals( otherItr.next() ) )
@@ -175,7 +175,7 @@ public class LinkedList<T> implements List<T> {
 	{ return size == 0; }
 
 	public Iterator<T> iterator() 
-	{ return new LinkedListIterator<T>(head); }
+	{ return new LinkedListIterator<>(head); }
 
 	public T get( int idx ) {
 		if( idx < -size || idx >= size )
@@ -241,10 +241,10 @@ public class LinkedList<T> implements List<T> {
 		str.append( "[" );
 		Node<T> currentNode = head.next();
 		for( int i = 0; i < size-1; i++ ) {
-			str.append( currentNode.data().toString() + ", " );
+			str.append(currentNode.data().toString()).append(", ");
 			currentNode = currentNode.next();
 		}
-		str.append( currentNode.data().toString() + "]" );
+		str.append(currentNode.data().toString()).append("]");
 		return str.toString();
 	}
 
@@ -282,8 +282,8 @@ public class LinkedList<T> implements List<T> {
 	public <E> E[] toArray( E[] array )
 	{ throw new UnsupportedOperationException( "unsupported operation" ); }
 
-	private Node<T> head;
-	private Node<T> tail;
+	private final Node<T> head;
+	private final Node<T> tail;
 	private int size;
 
 }
